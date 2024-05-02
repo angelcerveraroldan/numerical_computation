@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def add_rows(matrix, i, j):
     """
     Add row i of a matrix with row j
@@ -15,9 +16,10 @@ def add_rows(matrix, i, j):
 
     arr = []
     for i in range(0, len(f)):
-        arr.append(f[i]+s[i])
+        arr.append(f[i] + s[i])
 
     return arr
+
 
 def sub_rows(matrix, i, j):
     """
@@ -34,10 +36,9 @@ def sub_rows(matrix, i, j):
 
     arr = []
     for i in range(0, len(f)):
-        arr.append(f[i]-s[i])
+        arr.append(f[i] - s[i])
 
     return arr
-
 
 
 def row_swap(matrix, i, j):
@@ -69,6 +70,7 @@ def scalar_row(matrix, i, scalar):
 
     matrix[i] = list(map(lambda x: x * scalar, matrix[i]))
 
+
 def pivot(matrix, i):
     """
     Pivot around a column, this will make it so that the value at matrix[i][i]
@@ -83,7 +85,7 @@ def pivot(matrix, i):
     at, max = i, matrix[i][i]
     for j in range(i, len(matrix)):
         val = matrix[j][i]
-        if val > max: 
+        if val > max:
             max = val
             at = j
 
