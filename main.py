@@ -1,4 +1,4 @@
-from utils.differentiation import differentiate_real_fn
+from src.differentiation import *
 
 def main():
     out = differentiate_real_fn(lambda x: 1/x, 0)

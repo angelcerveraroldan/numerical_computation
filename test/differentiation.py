@@ -1,8 +1,8 @@
 import unittest, math
 import numpy as np
 
-from utils import DEFAULT_DELTA 
-from utils.differentiation import differentiate_real_fn, jacobian
+from src.constants import DEFAULT_DELTA 
+from src.differentiation import differentiate_real_fn, differentiate_real_fn_accurate, jacobian
 
 class DifferentiationTest(unittest.TestCase):
     def test_differentiate_linear(self):
@@ -11,7 +11,15 @@ class DifferentiationTest(unittest.TestCase):
         actual = [differentiate_real_fn(fn, x) for x in range(0, 100)]
 
         for dif in actual:
-            self.assertAlmostEqual(dif, 2, None, None, DEFAULT_DELTA)
+            self.assertAlmostEqual(dif, 2, None, None, DEFAULT_DELTA / 100.0)
+
+    def test_differentiate_linear_accuarate(self):
+        # Simple linear function
+        fn     = lambda x: 1 + 2 * x
+        actual = [differentiate_real_fn_accurate(fn, x) for x in range(0, 100)]
+
+        for dif in actual:
+            self.assertAlmostEqual(dif, 2, None, None, DEFAULT_DELTA / 100.0)
 
 
     def test_jacobian(self):
@@ -22,7 +30,7 @@ class DifferentiationTest(unittest.TestCase):
 
         inputs_outputs = [
                 ([0.0, 0.0],   [ [0.0,         0.0], [0.0,  1.0] ]),
-                ([1.0, 1.0],   [ [3.0,   -0.841470], [2.0,  1.0] ]),
+                ([1.0, 1.0],   [ [3.0,   -0.8414709847803792], [2.0,  1.0] ]),
                 ([11.0, 14.0], [ [363.0, -0.990607], [22.0, 1.0] ])
         ]
 

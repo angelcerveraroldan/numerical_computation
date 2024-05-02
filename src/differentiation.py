@@ -1,4 +1,4 @@
-_default_diff = 0.0000001
+_default_diff = 0.000001
 
 def differentiate_real_fn(fn, x, diff = _default_diff):
     """
@@ -16,6 +16,24 @@ def differentiate_real_fn(fn, x, diff = _default_diff):
     """
 
     return (fn(x + diff) - fn(x - diff))/(2 * diff)
+
+
+def differentiate_real_fn_accurate(fn, x, diff = _default_diff):
+    """
+    Differentiate a function at a given value x, this function proved more accuracy than differential_real_fn
+
+    Note that if you differentiate a function at some input where it is not defined, you will still get some output, but it will be nonsense. Make sure that the function can be differentiated befere trying to do so!
+
+    Eg: d/dx (1/x) at x = 0 is equal to 100000000000000.0 
+
+    @param function from real to real
+    @param x where to evaluate the functions derivative
+    @param diff value of h in derivative definition, default value is given
+
+    @returns the derivatives value evaluauted at x
+    """
+
+    return (- fn(x + 2 *diff) + 8 * fn(x + diff) - 8 * fn(x - diff) + fn(x - 2 * diff))/(12 * diff)
 
 
 
