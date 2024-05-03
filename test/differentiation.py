@@ -14,7 +14,7 @@ class DifferentiationTest(unittest.TestCase):
         for dif in actual:
             self.assertAlmostEqual(dif, 2, None, None, DEFAULT_DELTA / 100.0)
 
-    def test_differentiate_linear_accuarate(self):
+    def test_differentiate_linear_accurate(self):
         # Simple linear function
         fn = lambda x: 1 + 2 * x
         actual = [differentiate_real_fn_accurate(fn, x) for x in range(0, 100)]
