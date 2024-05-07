@@ -6,7 +6,7 @@ from src.linear_eq.lu_decomp import lu_decomp, solve, solve_upper_triangular
 
 
 class LuDecompTest(unittest.TestCase):
-    def test_differentiate_linear(self):
+    def decompose_matrix(self):
         matrix = [
             [1, 2.2, 1],
             [13.44, 4, 1.12],
