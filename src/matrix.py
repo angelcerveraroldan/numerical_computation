@@ -41,6 +41,20 @@ def sub_rows(matrix, i, j):
     return arr
 
 
+def add_rows_scalar(matrix, i, j, c):
+    """
+    adds replaces matrix[i] with matrix[i]+(c*matrix[j])
+    @param matrix:
+    @param i: row being added to
+    @param j: row being added
+    @param c: scalar
+    @return: new matrix
+    """
+    ret = np.asfarray(matrix.copy())
+    ret[i] = ret[i]+(c*ret[j])
+    return ret
+
+
 def row_swap(matrix, i, j):
     """
     Swap two rows in a matrix

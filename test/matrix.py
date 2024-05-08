@@ -1,6 +1,6 @@
 import unittest
 
-from src.matrix import add_rows, pivot, row_swap, scalar_row, sub_rows
+from src.matrix import add_rows, pivot, row_swap, scalar_row, sub_rows, add_rows_scalar
 
 
 class MatrixOpsTest(unittest.TestCase):
@@ -8,6 +8,14 @@ class MatrixOpsTest(unittest.TestCase):
         matrix = [[1, 2], [3, 4]]
         self.assertEqual([4, 6], add_rows(matrix, 0, 1))
         self.assertEqual([2, 2], sub_rows(matrix, 1, 0))
+
+    def test_add_rows_scalar(self):
+        matrix = [[2.3, 3.4], [1, 2]]
+        sol = add_rows_scalar(matrix, 1, 0, -2)
+        expected = [[2.3, 3.4], [-3.5999999999999996, -4.8]]
+        for r_1, r_2 in zip(sol, expected):
+            for a, b in zip(r_1,r_2):
+                self.assertEqual(a, b)
 
     def test_swap_rows(self):
         matrix = [[1, 2], [3, 4]]
