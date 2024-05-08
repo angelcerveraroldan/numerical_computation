@@ -22,7 +22,7 @@ class DifferentiationTest(unittest.TestCase):
         for dif in actual:
             self.assertAlmostEqual(dif, 2, None, None, DEFAULT_DELTA / 100.0)
 
-    def test_jacobian(self):
+    def test_jacobian_trig(self):
         functions = [
             lambda inarr: math.cos(inarr[1]) + inarr[0] ** 3,
             lambda inarr: inarr[0] ** 2 + inarr[1]
@@ -32,6 +32,25 @@ class DifferentiationTest(unittest.TestCase):
             ([0.0, 0.0], [[0.0, 0.0], [0.0, 1.0]]),
             ([1.0, 1.0], [[3.0, -0.8414709847803792], [2.0, 1.0]]),
             ([11.0, 14.0], [[363.0, -0.990607], [22.0, 1.0]])
+        ]
+
+        for input, output in inputs_outputs:
+            jacobian_eval_flattened = np.array(jacobian(functions, input)).flatten()
+            expected_flattened = np.array(output).flatten()
+
+            for actual, expeceted in zip(jacobian_eval_flattened, expected_flattened):
+                self.assertAlmostEqual(actual, expeceted, None, None, DEFAULT_DELTA)
+
+    def test_jacobian_lin(self):
+        functions = [
+            lambda inarr: (1.4 * inarr[0]) - inarr[1],
+            lambda inarr: inarr[0] ** 2 - 1.6 * inarr[0] - inarr[1],
+        ]
+
+        inputs_outputs = [
+            ([0.0, 0.0], [[1.4, -1.0], [-1.6, -1.0]]),
+            ([1.0, 1.0], [[1.4, -1.0], [2 - 1.6, -1.0]]),
+            ([5.0, 5.0], [[1.4, -1.0], [10 - 1.6, -1.0]]),
         ]
 
         for input, output in inputs_outputs:
