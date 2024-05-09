@@ -40,28 +40,19 @@ def _poly_newton_coefficient(x, y):
     return a
 
 
-def newton_polynomial(x_data, y_data, x):
+def newton_polynomial(x_data, fx_data, evals):
     """
-    x_data: data points at x
-    y_data: data points at y
-    x: evaluation point(s)
+    Gives evaluation(s) of a newton polynomial approximation of an unknown function
+    @param x_data: data points at x
+    @param fx_data: unknown function outputs at x points
+    @param evals: evaluation point(s)
+    @return evaluation at point or array of points
     """
-    a = _poly_newton_coefficient(x_data, y_data)
+    a = _poly_newton_coefficient(x_data, fx_data)
     n = len(x_data) - 1  # Degree of polynomial
     p = a[n]
 
     for k in range(1, n + 1):
-        p = a[n - k] + (x - x_data[n - k])*p
+        p = a[n - k] + (evals - x_data[n - k]) * p
 
     return p
-
-
-x = np.array([25, 50, 75])
-fx = np.array([829800, 3298250, 7405450])
-print(x)
-print(fx)
-print()
-print(vandermonde(x, fx))
-print(lagrangian(x, fx))
-
-print(newton_polynomial(x, fx, 0))
