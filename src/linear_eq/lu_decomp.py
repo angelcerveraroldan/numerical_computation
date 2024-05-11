@@ -55,22 +55,3 @@ def lu_decomp(matrix):
 
     p, l, u = sc.linalg.lu(matrix, permute_l=False)
     return p, l, u
-
-def lu_decomp_no_pp(matrix):
-    """
-    L * U = matrix
-    @param matrix: square matrix
-    @return: returns two matrices L U
-    """
-    n = len(matrix)
-    lower = np.zeros((n, n), dtype=np.float64)
-    for k in range(n - 1):
-        lower[k][k] = 1
-        entry_value = matrix[k][k]
-        for i in range(k + 1, n):
-            c = matrix[i][k] / entry_value
-            matrix = add_rows_scalar(matrix, i, k, -c)
-            lower[i][k] = c
-    lower[n - 1][n - 1] = 1
-
-    return lower, matrix
