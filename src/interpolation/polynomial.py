@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def vandermonde_manual(pairs):
+def vandermonde_manual(pairs, show=False):
     """
     Given k points (xk, f(xk)), find a polynomial of order k-1
     that approximates the function f.
@@ -23,8 +23,29 @@ def vandermonde_manual(pairs):
         np.array(matrix),
         np.array(output))
 
+    if show:
+        power = 0
+        strv = ""
+        for coefficient in coefficients:
+            prettyx = ("x^" + str(power)) if power > 0 else ""
+            strv += (str(coefficient) + prettyx + " + ")
+            power += 1
+
+        print(strv[:-3])
+
     return coefficients
 
+
+def newton_polynomial(pairs):
+    inputs = np.array(list(map(lambda x: x[0], pairs)))
+    outputs = np.array(list(map(lambda x: x[1], pairs)))
+    ln = len(inputs)
+    for i in range(1, ln):
+        top = outputs[i:ln] - outputs[i - 1]
+        btm = inputs[i:ln] - inputs[i - 1]
+        outputs[i:ln] = top / btm
+
+    return outputs
 
 def lagrangian_basis(pairs, x):
     """
