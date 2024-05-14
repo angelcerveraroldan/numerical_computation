@@ -1,5 +1,5 @@
 import numpy as np
-
+from numpy import linalg as LA
 
 def add_rows(matrix, i, j):
     """
@@ -104,3 +104,9 @@ def pivot(matrix, i):
             at = j
 
     row_swap(matrix, i, at)
+
+
+def eigenthangs(matrix):
+    npmatrix = np.array(matrix)
+    eigenvalues, eigenvectors = LA.eig(npmatrix)
+    return eigenvalues, eigenvectors
