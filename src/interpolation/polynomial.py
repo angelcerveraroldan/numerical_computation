@@ -37,6 +37,17 @@ def vandermonde_manual(pairs, show=False):
 
 
 def newton_polynomial(pairs):
+    """
+    Find coefficients of Newton Polynomial in the form:
+
+    c_0
+    + c_1 (x - x_0)
+    + c_2 (x - x_0) (x - x_1)
+    + ...
+
+    @param pairs: Array of tuples in the form (x_n, f(x_n))
+    @return:
+    """
     inputs = np.array(list(map(lambda x: x[0], pairs)))
     outputs = np.array(list(map(lambda x: x[1], pairs)))
     ln = len(inputs)
@@ -46,6 +57,7 @@ def newton_polynomial(pairs):
         outputs[i:ln] = top / btm
 
     return outputs
+
 
 def lagrangian_basis(pairs, x):
     """
