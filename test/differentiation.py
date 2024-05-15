@@ -2,17 +2,21 @@ import unittest, math
 import numpy as np
 
 from src.constants import DEFAULT_DELTA
-from src.differentiation import differentiate_real_fn, differentiate_real_fn_accurate, jacobian
+from src.differentiation import differentiate_real_fn, differentiate_real_fn_accurate, jacobian, nth_derivative_at
 
 
 class DifferentiationTest(unittest.TestCase):
     def test_differentiate_linear(self):
         # Simple linear function
         fn = lambda x: 1 + 2 * x
-        actual = [differentiate_real_fn(fn, x) for x in range(0, 100)]
 
+        actual = [differentiate_real_fn(fn, x) for x in range(0, 100)]
         for dif in actual:
             self.assertAlmostEqual(dif, 2, None, None, DEFAULT_DELTA / 100.0)
+
+        actual = [nth_derivative_at(2, fn, x) for x in range(0, 1)]
+        for dif in actual:
+            self.assertAlmostEqual(dif, 0, None, None, DEFAULT_DELTA)
 
     def test_differentiate_linear_accurate(self):
         # Simple linear function

@@ -19,6 +19,28 @@ def differentiate_real_fn(fn, x, diff=_default_diff):
     return (fn(x + diff) - fn(x - diff)) / (2 * diff)
 
 
+
+def nth_derivative_at(n, fn, x, diff=_default_diff):
+    """
+    WARNING, DO NOT USE THIS FOR ANY N GREATER THAN 3, IT IS A PIECE OF SHIT
+
+    @param n:
+    @param fn:
+    @param x:
+    @param diff:
+    @return:
+    """
+    if n == 0:
+        return fn(x)
+    if n == 1:
+        return differentiate_real_fn(fn, x, diff)
+    else:
+        left = nth_derivative_at(n - 1, fn, x + diff)
+        right = nth_derivative_at(n - 1, fn, x - diff)
+        delta = left - right
+        return delta / (2 * diff)
+
+
 def differentiate_real_fn_accurate(fn, x, diff=_default_diff):
     """
     Differentiate a function at a given value x, this function proved more accuracy than differential_real_fn
